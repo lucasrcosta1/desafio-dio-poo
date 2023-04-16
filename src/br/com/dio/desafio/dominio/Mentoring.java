@@ -2,7 +2,7 @@ package br.com.dio.desafio.dominio;
 
 import java.time.LocalDate;
 
-public class Mentoring extends Contents{
+public class Mentoring extends Content{
     private LocalDate date;
 
     /*

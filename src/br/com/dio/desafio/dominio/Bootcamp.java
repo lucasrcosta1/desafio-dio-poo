@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Bootcamp extends Contents{
+public class Bootcamp extends Content{
     private final LocalDate beginDate = LocalDate.now();
     private final LocalDate endDate = beginDate.plusDays(45);
     /*Porque nao uma HashSet em vez de um LinkedHashSet?
     A ordem que esses devs sao inseridos nao faz diferenca nesse caso.
     */
     private Set<Dev> devsSubscribed = new HashSet<Dev>();
-    private Set<Contents> contents = new LinkedHashSet<Contents>();
+    private Set<Content> contents = new LinkedHashSet<Content>();
 
     /*
      ***********************************
@@ -34,10 +34,10 @@ public class Bootcamp extends Contents{
         this.devsSubscribed = devsSubscribed;
     }
 
-    public Set<Contents> getContents() {
+    public Set<Content> getContents() {
         return contents;
     }
-    public void setContents(Set<Contents> contents) {
+    public void setContents(Set<Content> contents) {
         this.contents = contents;
     }
 
@@ -48,11 +48,11 @@ public class Bootcamp extends Contents{
      */
 
     public Bootcamp () {}
-    public Bootcamp(Set<Dev> devsSubscribed, Set<Contents> contents) {
+    public Bootcamp(Set<Dev> devsSubscribed, Set<Content> contents) {
         this.devsSubscribed = devsSubscribed;
         this.contents = contents;
     }
-    public Bootcamp(String title, String description, Set<Dev> devsSubscribed, Set<Contents> contents) {
+    public Bootcamp(String title, String description, Set<Dev> devsSubscribed, Set<Content> contents) {
         super(title, description);
         this.devsSubscribed = devsSubscribed;
         this.contents = contents;

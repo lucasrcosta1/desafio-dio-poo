@@ -1,6 +1,7 @@
 package br.com.dio.desafio.dominio;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -8,8 +9,8 @@ public class Dev {
     /*Porque nao uma lista em vez de um LinkedHashSet?
     Um dev nao pode se inscrever em mais de um conteudo mais de uma vez, por isso nao é necessario o uso de uma lista.
     */
-    private Set<Contents> subscribedContent = new LinkedHashSet<Contents>();
-    private Set<Contents> finishedContent = new LinkedHashSet<Contents>();
+    private Set<Content> subscribedContent = new LinkedHashSet<Content>();
+    private Set<Content> finishedContent = new LinkedHashSet<Content>();
 
     /*
      ***********************************
@@ -24,17 +25,17 @@ public class Dev {
         this.name = name;
     }
 
-    public Set<Contents> getSubscribedContent() {
+    public Set<Content> getSubscribedContent() {
         return subscribedContent;
     }
-    public void setSubscribedContent(Set<Contents> subscribedContent) {
+    public void setSubscribedContent(Set<Content> subscribedContent) {
         this.subscribedContent = subscribedContent;
     }
 
-    public Set<Contents> getFinishedContent() {
+    public Set<Content> getFinishedContent() {
         return finishedContent;
     }
-    public void setFinishedContent(Set<Contents> finishedContent) {
+    public void setFinishedContent(Set<Content> finishedContent) {
         this.finishedContent = finishedContent;
     }
 
@@ -46,7 +47,7 @@ public class Dev {
 
     public Dev () {}
 
-    public Dev(String name, Set<Contents> subscribedContent, Set<Contents> finishedContent) {
+    public Dev(String name, Set<Content> subscribedContent, Set<Content> finishedContent) {
         this.name = name;
         this.subscribedContent = subscribedContent;
         this.finishedContent = finishedContent;
@@ -62,18 +63,33 @@ public class Dev {
      * Subscribe dev to a bootcamp.
      * @param bootcamp
      */
-    public void subscribeBootcamp (Bootcamp bootcamp) {}
+    public void subscribeBootcamp (Bootcamp bootcamp) {
+        this.subscribedContent.addAll(bootcamp.getContents());
+        bootcamp.getDevsSubscribed().add(this);
+    }
 
     /**
      * Change dev's progress.
      */
-    public void progress () {}
+    public void progress () {
+        Optional<Content> content = this.subscribedContent.stream().findFirst();
+        if (content.isPresent()) {
+            this.finishedContent.add(content.get());
+            this.subscribedContent.remove(content.get());
+        } else {
+            System.err.println("Voce nao esta matriculado em nenhum conteudo!");
+        }
+    }
 
     /**
      * Calculate total experience gathered so far by the dev.
+     * @return
      */
-    public void calculateTotalXp () {
-
+    public double calculateTotalXp () {
+        return this.finishedContent
+            .stream()
+            .mapToDouble(content -> content.calculateXp()) //or .mapToDouble(Content::calculateXp) - to use reference method.
+            .sum();
     }
 
     @Override

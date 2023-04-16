@@ -1,6 +1,6 @@
 package br.com.dio.desafio.dominio;
 
-public abstract class Contents {
+public abstract class Content {
     protected static final double PATTERN_XP = 10d;
 
     private String title;
@@ -32,9 +32,9 @@ public abstract class Contents {
      *********************************** 
      */
     
-    public Contents () {}
+    public Content () {}
 
-    public Contents(String title, String description) {
+    public Content(String title, String description) {
         this.title = title;
         this.description = description;
     }
