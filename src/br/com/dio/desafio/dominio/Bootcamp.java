@@ -48,13 +48,8 @@ public class Bootcamp extends Content{
      */
 
     public Bootcamp () {}
-    public Bootcamp(Set<Dev> devsSubscribed, Set<Content> contents) {
-        this.devsSubscribed = devsSubscribed;
-        this.contents = contents;
-    }
-    public Bootcamp(String title, String description, Set<Dev> devsSubscribed, Set<Content> contents) {
+    public Bootcamp(String title, String description, Set<Content> contents) {
         super(title, description);
-        this.devsSubscribed = devsSubscribed;
         this.contents = contents;
     }   
 
