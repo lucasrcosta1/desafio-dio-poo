@@ -1,6 +1,6 @@
 package br.com.dio.desafio.dominio;
 
-public class Course extends Contents{
+public class Course extends Content{
     private int hours;
 
     /*
